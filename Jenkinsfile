@@ -2,18 +2,16 @@ node {
     def app
 
     stage('Clone repository') {
-      
-            https://github.com/VelpulaAkkini/fastapijenkTOimage.git
-      
+
+        checkout scm
     }
 
     stage('Build image') {
   
-       app = docker.build("nagvelpula/test")
+       app = docker.build("narsimha2580/test")
     }
 
     stage('Test image') {
-  
 
         app.inside {
             sh 'echo "Tests passed"'
@@ -22,7 +20,7 @@ node {
 
     stage('Push image') {
         
-        docker.withRegistry('https://registry.hub.docker.com', 'nagvelpula/Nag@#2022') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
         }
     }
