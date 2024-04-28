@@ -3,13 +3,13 @@ node {
 
     stage('Clone repository') {
       
-
-        checkout scm
+            https://github.com/VelpulaAkkini/fastapijenkTOimage.git
+      
     }
 
     stage('Build image') {
   
-       app = docker.build("narsimha2580/test")
+       app = docker.build("nagvelpula/test")
     }
 
     stage('Test image') {
@@ -22,7 +22,7 @@ node {
 
     stage('Push image') {
         
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        docker.withRegistry('https://registry.hub.docker.com', 'nagvelpula/Nag@#2022') {
             app.push("${env.BUILD_NUMBER}")
         }
     }
